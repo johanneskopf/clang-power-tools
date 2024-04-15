@@ -1,4 +1,4 @@
-﻿using ClangPowerTools.MVVM;
+using ClangPowerTools.MVVM;
 using ClangPowerTools.MVVM.Commands;
 using ClangPowerTools.Services;
 using System;
@@ -48,7 +48,7 @@ namespace ClangPowerTools
       set
       {
         compilerModel = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CompilerModel"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CompilerModel)));
       }
     }
 
@@ -84,47 +84,47 @@ namespace ClangPowerTools
     #region Commands
     public ICommand CompileFlagsAddDataCommand
     {
-      get => compileFlagsAddDataCommand ?? (compileFlagsAddDataCommand = new RelayCommand(() => UpdateCompileFlags(), () => CanExecute));
+      get => compileFlagsAddDataCommand ?? (compileFlagsAddDataCommand = new RelayCommand(UpdateCompileFlags, () => CanExecute));
     }
 
     public ICommand FilesToIgnoreAddDataCommand
     {
-      get => filesToIgnoreAddDataCommand ?? (filesToIgnoreAddDataCommand = new RelayCommand(() => UpdateFilesToIgnore(), () => CanExecute));
+      get => filesToIgnoreAddDataCommand ?? (filesToIgnoreAddDataCommand = new RelayCommand(UpdateFilesToIgnore, () => CanExecute));
     }
 
     public ICommand ProjectsToIgnoreAddDataCommand
     {
-      get => projectsToIgnoreAddDataCommand ?? (projectsToIgnoreAddDataCommand = new RelayCommand(() => UpdateProjectsToIgnore(), () => CanExecute));
+      get => projectsToIgnoreAddDataCommand ?? (projectsToIgnoreAddDataCommand = new RelayCommand(UpdateProjectsToIgnore, () => CanExecute));
     }
 
     public ICommand PowerShellUpdateScriptsCommand
     {
-      get => powerShellUpdateScriptsCommand ?? (powerShellUpdateScriptsCommand = new RelayCommand(() => UpdateScripts(), () => CanExecute));
+      get => powerShellUpdateScriptsCommand ?? (powerShellUpdateScriptsCommand = new RelayCommand(UpdateScripts, () => CanExecute));
     }
 
     public ICommand AddCptAliasCommand
     {
-      get => addCptAliasCommand ?? (addCptAliasCommand = new RelayCommand(() => AddCptAlias(), () => CanExecute));
+      get => addCptAliasCommand ?? (addCptAliasCommand = new RelayCommand(AddCptAlias, () => CanExecute));
     }
     #endregion
 
     #region Methods
     private void UpdateCompileFlags()
     {
-      compilerModel.CompileFlags = OpenContentDialog(compilerModel.CompileFlags);
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CompilerModel"));
+      compilerModel.CompileFlags = OpenContentDialog(compilerModel.CompileFlags, nameof(compilerModel.CompileFlags).ToReadableFormat());
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CompilerModel)));
     }
 
     private void UpdateFilesToIgnore()
     {
-      compilerModel.FilesToIgnore = OpenContentDialog(compilerModel.FilesToIgnore, true, true);
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CompilerModel"));
+      compilerModel.FilesToIgnore = OpenContentDialog(compilerModel.FilesToIgnore, nameof(compilerModel.FilesToIgnore).ToReadableFormat(), true, true);
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CompilerModel)));
     }
 
     private void UpdateProjectsToIgnore()
     {
-      compilerModel.ProjectsToIgnore = OpenContentDialog(compilerModel.ProjectsToIgnore);
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CompilerModel"));
+      compilerModel.ProjectsToIgnore = OpenContentDialog(compilerModel.ProjectsToIgnore, nameof(compilerModel.ProjectsToIgnore).ToReadableFormat());
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CompilerModel)));
     }
 
     private void AddCptAlias()
@@ -139,7 +139,7 @@ namespace ClangPowerTools
       }
       else 
       {
-        MessageBox.Show("Sorry, we can't find Powershell 7 in PATH enviroment variables",
+        MessageBox.Show("Sorry, we can't find Powershell 7 in PATH environment variables",
                                       "Clang Power Tools", MessageBoxButtons.OK, MessageBoxIcon.Error);
       }
     }

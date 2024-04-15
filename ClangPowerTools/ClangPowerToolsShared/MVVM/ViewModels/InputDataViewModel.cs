@@ -16,6 +16,7 @@ namespace ClangPowerTools
 
     public event PropertyChangedEventHandler PropertyChanged;
 
+    private string title;
     private string inputToAdd;
     private InputDataView inputDataView;
     private ICommand addCommand;
@@ -29,9 +30,10 @@ namespace ClangPowerTools
 
     #region Constructor
 
-    public InputDataViewModel(string content, bool showFilesPicker = false, bool showFolderPicker = false)
+    public InputDataViewModel(string content, string title, bool showFilesPicker = false, bool showFolderPicker = false)
     {
       CreateInputsCollection(content);
+      Title = title;
       ShowFilesPicker = showFilesPicker;
       ShowFolderPicker = showFolderPicker;
     }
@@ -42,6 +44,19 @@ namespace ClangPowerTools
 
 
     #region Properties
+
+    public string Title
+    {
+      get
+      {
+        return title;
+      }
+      set
+      {
+        title = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title)));
+      }
+    }
 
     public string InputToAdd
     {

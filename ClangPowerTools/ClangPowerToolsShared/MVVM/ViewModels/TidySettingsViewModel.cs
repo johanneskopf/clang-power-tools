@@ -50,7 +50,7 @@ namespace ClangPowerTools
       set
       {
         tidyModel = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TidyModel"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TidyModel)));
       }
     }
 
@@ -60,7 +60,7 @@ namespace ClangPowerTools
       set
       {
         displayWarning = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayWarning"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DisplayWarning)));
       }
     }
 
@@ -149,28 +149,28 @@ namespace ClangPowerTools
 
     private void UpdateHeaderFilter()
     {
-      tidyModel.HeaderFilter = OpenContentDialog(tidyModel.HeaderFilter);
+      tidyModel.HeaderFilter = OpenContentDialog(tidyModel.HeaderFilter, nameof(tidyModel.HeaderFilter).ToReadableFormat());
       HeaderFilter = tidyModel.HeaderFilter;
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TidyModel"));
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("HeaderFilter"));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TidyModel)));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HeaderFilter)));
     }
 
     private void UpdateCustomChecks()
     {
-      tidyModel.CustomChecks = OpenContentDialog(tidyModel.CustomChecks);
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TidyModel"));
+      tidyModel.CustomChecks = OpenContentDialog(tidyModel.CustomChecks, nameof(tidyModel.CustomChecks).ToReadableFormat());
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TidyModel)));
     }
 
     private void UpdateCustomExecutable()
     {
       tidyModel.CustomExecutable = OpenFile(string.Empty, ".exe", "Executable files|*.exe");
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TidyModel"));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TidyModel)));
     }
 
     private void UpdatePredefinedChecks()
     {
       OpenChecksWindow();
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("TidyModel"));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(TidyModel)));
     }
 
     private void ExportTidyConfig()

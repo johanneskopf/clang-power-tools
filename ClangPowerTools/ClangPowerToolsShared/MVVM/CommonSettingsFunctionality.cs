@@ -108,9 +108,9 @@ namespace ClangPowerTools
       FileSystem.WriteContentToFile(path, content);
     }
 
-    protected string OpenContentDialog(string content, bool showFilesPicker = false, bool showFolderPicker = false)
+    protected string OpenContentDialog(string content, string title, bool showFilesPicker = false, bool showFolderPicker = false)
     {
-      InputDataViewModel inputDataViewModel = new InputDataViewModel(content, showFilesPicker, showFolderPicker);
+      var inputDataViewModel = new InputDataViewModel(content, title, showFilesPicker, showFolderPicker);
       inputDataViewModel.ShowViewDialog();
       string input = CreateInput(inputDataViewModel.Inputs.ToList());
 

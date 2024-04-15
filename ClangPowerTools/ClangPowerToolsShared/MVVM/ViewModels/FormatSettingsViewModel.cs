@@ -1,4 +1,4 @@
-﻿using ClangPowerTools.Helpers;
+using ClangPowerTools.Helpers;
 using ClangPowerTools.MVVM;
 using ClangPowerTools.MVVM.Commands;
 using ClangPowerTools.MVVM.Views;
@@ -42,7 +42,7 @@ namespace ClangPowerTools
       set
       {
         formatModel = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatModel"));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatModel)));
       }
     }
 
@@ -123,26 +123,26 @@ namespace ClangPowerTools
 
     private void UpdateFileExtensions()
     {
-      formatModel.FileExtensions = OpenContentDialog(formatModel.FileExtensions);
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatModel"));
+      formatModel.FileExtensions = OpenContentDialog(formatModel.FileExtensions, nameof(formatModel.FileExtensions).ToReadableFormat());
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatModel)));
     }
 
     private void UpdateFilesToIgnore()
     {
-      formatModel.FilesToIgnore = OpenContentDialog(formatModel.FilesToIgnore, true, true);
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatModel"));
+      formatModel.FilesToIgnore = OpenContentDialog(formatModel.FilesToIgnore, nameof(formatModel.FilesToIgnore).ToReadableFormat(), true, true);
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatModel)));
     }
 
     private void UpdateAssumeFilename()
     {
-      formatModel.AssumeFilename = OpenContentDialog(formatModel.AssumeFilename);
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatModel"));
+      formatModel.AssumeFilename = OpenContentDialog(formatModel.AssumeFilename, nameof(formatModel.AssumeFilename).ToReadableFormat());
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatModel)));
     }
 
     private void UpdateCustomExecutable()
     {
       formatModel.CustomExecutable = OpenFile(string.Empty, ".exe", "Executable files|*.exe");
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FormatModel"));
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(FormatModel)));
     }
 
     #endregion

@@ -179,7 +179,7 @@ namespace ClangPowerToolsShared.MVVM.ViewModels
     }
 
     /// <summary>
-    /// Update checked numer on check and uncheck action
+    /// Update checked number on check and uncheck action
     /// </summary>
     /// <param name="file"></param>
     public void UpdateCheckedNumber(FileModel file)

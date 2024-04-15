@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 
 namespace ClangPowerTools
 {
@@ -57,7 +58,7 @@ namespace ClangPowerTools
     /// <returns></returns>
     public static IEnumerable<int> AllIndexesOf(this string str, string value)
     {
-      if (String.IsNullOrEmpty(value))
+      if (string.IsNullOrEmpty(value))
         throw new ArgumentException("the string to find may not be empty", "value");
       for (int index = 0; ; index += value.Length)
       {
@@ -72,7 +73,7 @@ namespace ClangPowerTools
     {
       char[] chars = input.ToCharArray();
       Array.Reverse(chars);
-      return new String(chars);
+      return new string(chars);
     }
 
 
@@ -82,6 +83,28 @@ namespace ClangPowerTools
         input = input.Substring(0, input.LastIndexOf(substring));
 
       return input;
+    }
+
+    public static string ToReadableFormat(this string input)
+    {
+      if (string.IsNullOrEmpty(input))
+        return input;
+
+      var readableFormat = new StringBuilder();
+      readableFormat.Append(char.ToUpper(input[0]));
+
+      for (int i = 1; i < input.Length; i++)
+      {
+        if (char.IsUpper(input[i]))
+        {
+          readableFormat.Append(" ").Append(char.ToLower(input[i]));
+        }
+        else
+        {
+          readableFormat.Append(input[i]);
+        }
+      }
+      return readableFormat.ToString();
     }
 
     #endregion
